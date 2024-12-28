@@ -1,0 +1,23 @@
+
+
+services:
+  # Service MySQL
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: crossword@  # Le mot de passe du root
+      MYSQL_DATABASE: crossword_db  # La base de données par défaut
+    volumes:
+      - ./database:/var/lib/mysql  # Persister les données de MySQL
+    ports:
+      - "3306:3306"
+    user: "999:999"
+  # Service Apache/PHP
+  web:
+    build: .
+    volumes:
+      - ./app:/var/www/html  # Monter le code PHP dans Apache
+    ports:
+      - "8080:80"
+
