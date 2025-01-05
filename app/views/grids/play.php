@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
 }
 
 $gridController = new GridController();
-$registrationResult = $gridController->playGrid($id);
+$playGrid = $gridController->playGrid($id);
 
 $savedCellController = new SavedCellsController();
 $cellController = new CellController();
@@ -33,11 +33,11 @@ $cellController = new CellController();
 
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id']; // ID de l'utilisateur connecté
-    $registrationResult5 = $savedCellController->getUserCells($userId, $id);
+    $cells = $savedCellController->getUserCells($userId, $id);
 } else {
     // Gérer le cas où l'utilisateur n'est pas connecté
     $userId = '';
-    $registrationResult5 = $savedCellController->getNotRegisteredUserCells($id);
+    $cells = $savedCellController->getNotRegisteredUserCells($id);
 
 }
 
@@ -47,7 +47,7 @@ if (isset($_SESSION['user_id'])) {
 
 
 $cellController = new CellController();
-$registrationResult2 = $cellController->getCells($id);
+$cells2 = $cellController->getCells($id);
 
 
 
@@ -59,18 +59,18 @@ $registrationResult2 = $cellController->getCells($id);
 
 
 $H_ClueController = new H_ClueController();
-$registrationResult3 = $H_ClueController->getH_Clues($id);
+$cells3 = $H_ClueController->getH_Clues($id);
 
 
 $V_ClueController = new V_ClueController();
-$registrationResult4 = $V_ClueController->getV_Clues($id);
+$cells4 = $V_ClueController->getV_Clues($id);
 
 // Convertir les résultats en JSON pour les passer à JavaScript
-$registrationResultJson = json_encode($registrationResult);
-$registrationResultJson2 = json_encode($registrationResult2);
-$registrationResultJson3 = json_encode($registrationResult3);
-$registrationResultJson4 = json_encode($registrationResult4);
-$registrationResultJson5 = json_encode($registrationResult5);
+$cellsJson = json_encode($playGrid);
+$cellsJson2 = json_encode($cells2);
+$cellsJson3 = json_encode($cells3);
+$cellsJson4 = json_encode($cells4);
+$cellsJson5 = json_encode($cells);
 
 
 
@@ -122,11 +122,11 @@ $data = json_decode(file_get_contents('php://input'), true); // Lire les donnée
             <h1 id="name">  </h1>
        
     <!-- Ajouter un élément avec un attribut data qui contient les données JSON -->
-    <div id="registration-data" data-registration="<?php echo htmlspecialchars($registrationResultJson); ?>"></div>
-    <div id="registration-data2" data-registration2="<?php echo htmlspecialchars($registrationResultJson2); ?>"></div>
-    <div id="registration-data3" data-registration3="<?php echo htmlspecialchars($registrationResultJson3); ?>"></div>
-    <div id="registration-data4" data-registration4="<?php echo htmlspecialchars($registrationResultJson4); ?>"></div>
-    <div id="registration-data5" data-registration5="<?php echo htmlspecialchars($registrationResultJson5); ?>"></div>
+    <div id="cell-data" data-cell="<?php echo htmlspecialchars($cellsJson); ?>"></div>
+    <div id="cell-data2" data-cell2="<?php echo htmlspecialchars($cellsJson2); ?>"></div>
+    <div id="cell-data3" data-cell3="<?php echo htmlspecialchars($cellsJson3); ?>"></div>
+    <div id="cell-data4" data-cell4="<?php echo htmlspecialchars($cellsJson4); ?>"></div>
+    <div id="cell-data5" data-cell5="<?php echo htmlspecialchars($cellsJson5); ?>"></div>
     
 
     <div id="buttons"> 
