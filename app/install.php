@@ -18,7 +18,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     file_put_contents('config.php', $configContent);
 
+    // Exécuter init.sql
+    try {
+        // Charger le script SQL
+        $sqlFile = 'init.sql';
+        if (!file_exists($sqlFile)) {
+            throw new Exception("Le fichier $sqlFile est introuvable.");
+        }
+        
+        $sqlContent = file_get_contents($sqlFile);
+
+        // Connexion à la base de données
+        $dsn = "mysql:host=$host;charset=utf8mb4";
+        $pdo = new PDO($dsn, $username, $password, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        ]);
+
+        $pdo->exec("USE `$dbname`;");
+
+        // Exécuter les commandes SQL de init.sql
+        $pdo->exec($sqlContent);
+
+        // Ajouter l'utilisateur admin par défaut
+        $passwordHash = password_hash('adminpassword', PASSWORD_DEFAULT); // Remplacez par le mot de passe de votre choix
+        $stmt = $pdo->prepare("INSERT INTO users (username, password_hash, email, role) VALUES (?, ?, ?, ?)");
+        $stmt->execute(['admin_user', $passwordHash, 'admin@example.com', 'admin']);
+
+        echo "<p>Base de données initialisée avec succès et utilisateur admin créé.</p>";
+    } catch (PDOException $e) {
+        echo "<p>Erreur lors de l'initialisation de la base de données : " . $e->getMessage() . "</p>";
+    } catch (Exception $e) {
+        echo "<p>" . $e->getMessage() . "</p>";
+    }
+
+    // Redirection vers la page principale
     header('Location: index.php');
+    exit;
 }
 ?>
 
@@ -37,18 +72,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <form method="POST">
-    <label  for="host">Hôte de la base de données:</label><br>
+    <label for="host">Hôte de la base de données:</label><br>
     <input placeholder="localhost" type="text" id="host" name="host" required><br>
 
-    <label  for="dbname">Nom de la base de données:</label><br>
-    <input  placeholder="projet" type="text" id="dbname" name="dbname" required><br>
+    <label for="dbname">Nom de la base de données:</label><br>
+    <input placeholder="projet" type="text" id="dbname" name="dbname" required><br>
 
-    <label  for="username">Nom d'utilisateur:</label><br>
+    <label for="username">Nom d'utilisateur:</label><br>
     <input placeholder="projet" type="text" id="username" name="username" required><br>
 
-    <label  for="password">Mot de passe:</label><br>
-    <input placeholder="tejorp"type="password" id="password" name="password" required><br><br>
+    <label for="password">Mot de passe:</label><br>
+    <input placeholder="tejorp" type="password" id="password" name="password" required><br><br>
 
     <button type="submit">Sauvegarder la configuration</button>
 </form>
 </body>
+</html>

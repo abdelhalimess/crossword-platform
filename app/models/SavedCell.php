@@ -40,7 +40,7 @@ class UserCell
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getCellsClearContent($gridId)
+    public function getBlackCells($gridId)
 {
     $query = "SELECT * FROM saved_cells WHERE grid_id = :grid_id";
     $stmt = $this->db->prepare($query);

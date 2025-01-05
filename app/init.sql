@@ -1,6 +1,4 @@
-CREATE DATABASE IF NOT EXISTS my_database;
-USE my_database;
-
+DROP TABLE IF EXISTS vertical_clues, horizontal_clues, cells, saved_cells, grids, users;
 -- Table users
 CREATE TABLE IF NOT EXISTS users     (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -24,7 +22,7 @@ CREATE TABLE IF NOT EXISTS grids (
 );
 
 
--- table pending games
+-- Table grilles en cours
 
 CREATE TABLE IF NOT EXISTS saved_cells (
     user_id INT NOT NULL,
@@ -40,8 +38,7 @@ CREATE TABLE IF NOT EXISTS saved_cells (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- tabke cells
--- if content is "black" it refer to black cells
+-- Table cellules
 CREATE TABLE IF NOT EXISTS cells(
     grid_id INT ,
     rowa INT,
@@ -51,6 +48,9 @@ CREATE TABLE IF NOT EXISTS cells(
     FOREIGN KEY (grid_id) REFERENCES grids(id) ON DELETE CASCADE
 );
 
+
+-- Table Définitions horizentales
+
 CREATE TABLE IF NOT EXISTS horizontal_clues(
     id INT  ,
     grid_id INT ,
@@ -58,6 +58,8 @@ CREATE TABLE IF NOT EXISTS horizontal_clues(
     PRIMARY KEY (id, grid_id),
     FOREIGN KEY (grid_id) REFERENCES grids(id) ON DELETE CASCADE
 ) ;
+
+-- Table Définitions verticales
 
 CREATE TABLE IF NOT EXISTS vertical_clues(
     id INT  ,
