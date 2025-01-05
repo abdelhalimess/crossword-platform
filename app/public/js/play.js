@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button2.type = "button";
 
         button2.addEventListener("click", () => {
-          window.location.replace("../../index.php");
+          window.location.replace("../../views/grids/play.php");
 
           const cellContents = getAllCellContents(
             cells[0].num_rows,
