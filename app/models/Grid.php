@@ -36,7 +36,7 @@ class Grid
             return true;
         }
 
-        return false;
+        header("Location: ../../index.php");
     }
 
 

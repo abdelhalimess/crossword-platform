@@ -18,7 +18,7 @@ class GridController
             return true;
 
         } else {
-            echo "Erreur lors de la création de la grille ";
+            return false;
         }
 
     }
