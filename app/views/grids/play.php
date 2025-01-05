@@ -88,7 +88,7 @@ $data = json_decode(file_get_contents('php://input'), true); // Lire les donnée
     
         foreach ($cells as $cell) {
             if (isset($cell['row'], $cell['col'], $cell['content'])) {
-                $result = $savedCellController->addUserCell($id,'1', $cell['row'], $cell['col'], $cell['content']);
+                $result = $savedCellController->addUserCell($id,$userId, $cell['row'], $cell['col'], $cell['content']);
                 if (!$result) {
                     $errors[] = "Erreur lors de l'insertion de la cellule (row: {$cell['row']}, col: {$cell['col']}).";
                 }
