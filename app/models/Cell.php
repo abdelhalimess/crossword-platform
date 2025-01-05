@@ -39,18 +39,6 @@ class Cell
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getBlackCellsByGridId($gridId)
-    {
-        $query = "SELECT * FROM cells WHERE grid_id = :grid_id AND content='black'";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':grid_id', $gridId);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-
-
     // Récupérer les cellules noires d'une grille
     public function getBlackCells($gridId)
     {
@@ -62,23 +50,6 @@ class Cell
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
-
-
-
-    
-    // Mettre à jour une cellule
-    public function updateCell($gridId, $row, $col, $content)
-    {
-        $query = "UPDATE cells SET content = :content WHERE grid_id = :grid_id AND rowa = :rowa AND col = :col";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':content', $content);
-        $stmt->bindParam(':grid_id', $gridId);
-        $stmt->bindParam(':rowa', $row); // Correction du nom de la colonne en `rowa`
-        $stmt->bindParam(':col', $col);
-
-        return $stmt->execute();
-    }
 
     // Supprimer une cellule
     public function deleteCell($gridId, $row, $col)
