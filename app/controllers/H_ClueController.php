@@ -18,12 +18,11 @@ class H_ClueController
 
 
 
-        // Récupérer les cellules d'une grille
-        public function getH_Clues($gridId)
-        {
-            return $this->H_clueModel->getH_CluesByGridId($gridId);
-        }
-    
+    // Récupérer les cellules d'une grille
+    public function getH_Clues($gridId)
+    {
+        return $this->H_clueModel->getH_CluesByGridId($gridId);
+    }
 
 
 
@@ -33,7 +32,8 @@ class H_ClueController
 
 
 
-// à modifier 
+
+    // à modifier 
 
 }
 ?>

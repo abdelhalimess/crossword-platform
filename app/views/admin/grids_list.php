@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $search = isset($_GET['search']) ? $_GET['search'] : null;
 
 
@@ -66,14 +66,15 @@ if (isset($_SESSION['warning'])) {
             <h2>Panneau Admin</h2>
         </div>
         <nav class="sidebar-menu">
-        <ul>
-            <li><a href="create_user.php">Créer des utilisateurs</a></li>
-            <li><a href="users_list.php">Gérer les utilisateurs</a></li>
-            <li><a href="grids_list.php">Gérer les grilles</a></li>
-        </ul>
-        <ul class="logout-section">
-            <li class="logout"><a href="../../views/auth/logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
-        </ul>
+            <ul>
+                <li><a href="create_user.php">Créer des utilisateurs</a></li>
+                <li><a href="users_list.php">Gérer les utilisateurs</a></li>
+                <li><a href="grids_list.php">Gérer les grilles</a></li>
+            </ul>
+            <ul class="logout-section">
+                <li class="logout"><a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+
+            </ul>
         </nav>
     </aside>
 
@@ -103,18 +104,18 @@ if (isset($_SESSION['warning'])) {
                 </thead>
                 <tbody>
                     <?php foreach ($gridList as $grid): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($grid['id']); ?></td>
-                        <td><?php echo htmlspecialchars($grid['name']); ?></td>
-                        <td>
-                            <form method="POST" action="grids_list.php"
-                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette grille ?');">
-                                <input type="hidden" name="action" value="delete_grid">
-                                <input type="hidden" name="grid_id" value="<?= htmlspecialchars($grid['id']) ?>">
-                                <button type="submit">Supprimer</button>
-                            </form>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><?php echo htmlspecialchars($grid['id']); ?></td>
+                            <td><?php echo htmlspecialchars($grid['name']); ?></td>
+                            <td>
+                                <form method="POST" action="grids_list.php"
+                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette grille ?');">
+                                    <input type="hidden" name="action" value="delete_grid">
+                                    <input type="hidden" name="grid_id" value="<?= htmlspecialchars($grid['id']) ?>">
+                                    <button type="submit">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
@@ -122,28 +123,29 @@ if (isset($_SESSION['warning'])) {
             <!-- Pagination -->
             <div id="pagination">
                 <?php if ($page > 1): ?>
-                <a href="admin.php?page=1&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
-                    <<< /a>
-                        <a
-                            href="admin.php?page=<?php echo $page - 1; ?>&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
-                            << /a>
+                    <a href="admin.php?page=1&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+                        <<< /a>
+                            <a
+                                href="admin.php?page=<?php echo $page - 1; ?>&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">
+                                << /a>
                                 <?php endif; ?>
 
                                 <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-                                <a href="admin.php?page=<?php echo $i; ?>&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>"
-                                    <?php if ($i == $page) echo 'class="active"'; ?>><?php echo $i; ?></a>
+                                    <a href="admin.php?page=<?php echo $i; ?>&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>"
+                                        <?php if ($i == $page)
+                                            echo 'class="active"'; ?>><?php echo $i; ?></a>
                                 <?php endfor; ?>
 
                                 <?php if ($page < $totalPages): ?>
-                                <a
-                                    href="admin.php?page=<?php echo $page + 1; ?>&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">></a>
-                                <a
-                                    href="admin.php?page=<?php echo $totalPages; ?>&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">>></a>
+                                    <a
+                                        href="admin.php?page=<?php echo $page + 1; ?>&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">></a>
+                                    <a
+                                        href="admin.php?page=<?php echo $totalPages; ?>&search=<?php echo htmlspecialchars($_GET['search'] ?? ''); ?>">>></a>
                                 <?php endif; ?>
             </div>
         </section>
 
-        </main>
+    </main>
 </body>
 
 </html>

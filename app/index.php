@@ -87,7 +87,7 @@ $totalPages = ceil($totalGrids / $itemsPerPage);
         <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'registered'): ?>
             <li><a href="">Accueil</a></li>
             <li><a href="views/grids/list.php">Voir mes grilles</a></li>
-            <li><a href="views/grids/create3.php">Créer une grille</a></li>
+            <li><a href="views/grids/create.php">Créer une grille</a></li>
             <li class="logout"><a  href="views/auth/logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
         <?php else: ?>
             <li><a href="views/auth/login.php">Connexion</a></li>

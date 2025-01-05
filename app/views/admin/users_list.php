@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     }
 }
 
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $search = isset($_GET['search']) ? $_GET['search'] : null;
 $searchUsername = isset($_GET['searchUsername']) ? $_GET['searchUsername'] : null;
 
@@ -68,14 +68,15 @@ if (isset($_SESSION['warning'])) {
             <h2>Panneau Admin</h2>
         </div>
         <nav class="sidebar-menu">
-        <ul>
-            <li><a href="create_user.php">Créer des utilisateurs</a></li>
-            <li><a href="users_list.php">Gérer les utilisateurs</a></li>
-            <li><a href="grids_list.php">Gérer les grilles</a></li>
-        </ul>
-        <ul class="logout-section">
-            <li class="logout"><a href="views/auth/logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
-        </ul>
+            <ul>
+                <li><a href="create_user.php">Créer des utilisateurs</a></li>
+                <li><a href="users_list.php">Gérer les utilisateurs</a></li>
+                <li><a href="grids_list.php">Gérer les grilles</a></li>
+            </ul>
+            <ul class="logout-section">
+                <li class="logout"><a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+
+            </ul>
         </nav>
     </aside>
 
@@ -102,25 +103,25 @@ if (isset($_SESSION['warning'])) {
                 </thead>
                 <tbody>
                     <?php foreach ($users as $user): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($user['id']); ?></td>
-                        <td><?php echo htmlspecialchars($user['username']); ?></td>
-                        <td><?php echo htmlspecialchars($user['email']); ?></td>
-                        <td>
-                            <form method="POST" action="users_list.php"
-                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
-                                <input type="hidden" name="action" value="delete_user">
-                                <input type="hidden" name="user_id" value="<?= htmlspecialchars($user['id']) ?>">
-                                <button type="submit">Supprimer</button>
-                            </form>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><?php echo htmlspecialchars($user['id']); ?></td>
+                            <td><?php echo htmlspecialchars($user['username']); ?></td>
+                            <td><?php echo htmlspecialchars($user['email']); ?></td>
+                            <td>
+                                <form method="POST" action="users_list.php"
+                                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');">
+                                    <input type="hidden" name="action" value="delete_user">
+                                    <input type="hidden" name="user_id" value="<?= htmlspecialchars($user['id']) ?>">
+                                    <button type="submit">Supprimer</button>
+                                </form>
+                            </td>
+                        </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
         </section>
 
-        </main>
+    </main>
 </body>
 
 </html>

@@ -15,7 +15,7 @@ if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id']; // ID de l'utilisateur connecté
 } else {
     // Gérer le cas où l'utilisateur n'est pas connecté
-    echo "Utilisateur non connecté.";
+    header('Location: ../auth/login.php');
 }
 
 // Check if the form was submitted
@@ -151,6 +151,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
    
         </section>
-    <script src="../../public/js/grid3.js"></script> 
+    <script src="../../public/js/create.js"></script> 
 </body>
 </html>

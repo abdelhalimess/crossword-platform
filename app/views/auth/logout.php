@@ -1,13 +1,13 @@
 <?php
 session_start();
+require_once '../../controllers/UserController.php';
 
-// Supprimer toutes les variables de session
-session_unset();
 
-// Détruire la session
-session_destroy();
+$userController = new UserController();
+$user = $userController->logout();
+
 
 // Rediriger l'utilisateur vers la page de connexion ou l'accueil
-header("Location: ../../index.php");
+
 exit();
 ?>

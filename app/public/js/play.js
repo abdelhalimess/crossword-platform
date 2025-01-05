@@ -55,12 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const blackCells = registrationResult2.filter(item => item.content === "black");  
             colorBlackCells(gridContainer, blackCells); 
 
-            if (registrationResult5.length!=0){
+            fillCellsWithContent(gridContainer,registrationResult5);
 
-                console.log("machi");
-
-                fillCellsWithContent(gridContainer,registrationResult5);
-            }
 
             
             //ellse
@@ -96,10 +92,18 @@ document.addEventListener('DOMContentLoaded', function() {
         
             });
 
-            const button2 = document.createElement("button");
+
+            const userIdElement = document.getElementById("userInfo");
+            const userId = userIdElement ? userIdElement.getAttribute("data-user-id") : null;
+            console.log(userId); 
+
+if (userId) {
+
+
+
+            const button2 = document.getElementById("SauvegarderButton");
 
             button2.innerText = "Sauvegarder";
-            button2.id = "SauvegarderButton";
             button2.type = "button"; 
    
         
@@ -142,9 +146,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
            
         
-            buttons.appendChild(button);
             buttons.appendChild(button2);
-
+            
+        }
+        buttons.appendChild(button);
             mainContainer.appendChild(gridContainer);
             console.log("Premier élément:", registrationResult[0].num_rows);
         

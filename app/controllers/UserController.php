@@ -3,12 +3,17 @@ require_once __DIR__ . '/../models/User.php';
 
 class UserController
 {
+    private $userModel;
+
+    public function __construct()
+    {
+        $this->userModel = new User();
+    }
     // Fonction pour enregistrer un nouvel utilisateur
     public function register($username, $password, $email, $role)
     {
-        $user = new User();
-        $user->create($username, $password, $email, $role);
-        if ($user) {
+        $this->userModel->create($username, $password, $email, $role);
+        if ($this->userModel) {
             return true;
         }
     }
@@ -16,9 +21,8 @@ class UserController
     // Fonction pour se connecter
     public function login($username, $password)
     {
-        $user = new User();
-        $userData = $user->getByUsername($username);
-    
+        $userData = $this->userModel->getByUsername($username);
+
         if ($userData) {
             // Vérifier le mot de passe
             if (password_verify($password, $userData['password_hash'])) {
@@ -33,7 +37,7 @@ class UserController
             $_SESSION['error'] = "Nom d'utilisateur ou mot de passe incorrect.";
         }
     }
-    
+
 
     // Fonction pour se déconnecter
     public function logout()
@@ -41,14 +45,14 @@ class UserController
         // Supprimer les variables de session
         session_unset();
         session_destroy();
+        header("Location: ../../index.php");
     }
 
     // Fonction pour récupérer l'utilisateur authentifié
     public function getAuthenticatedUser()
     {
         if (isset($_SESSION['user_id'])) {
-            $user = new User();
-            return $user->getById($_SESSION['user_id']); // Récupérer l'utilisateur à partir de l'ID de session
+            return $this->userModel->getById($_SESSION['user_id']); // Récupérer l'utilisateur à partir de l'ID de session
         }
 
         return null; // Aucun utilisateur authentifié
@@ -57,29 +61,26 @@ class UserController
     // Fonction pour récupérer un utilisateur par son nom d'utilisateur
     public function getUserByUsername($username)
     {
-        $user = new User();
-        return $user->getByUsername($username);
+        return $this->userModel->getByUsername($username);
     }
 
     // Fonction pour récupérer un utilisateur par son ID
     public function getUserById($userId)
     {
-        $user = new User();
-        return $user->getById($userId);
+        return $this->userModel->getById($userId);
     }
 
-// ----------------------------------------------------------------
 
 
-
-    public function deleteUser($userId) {
-        $user = new User();
+ // Fonction pour supprimer un utilisateur
+    public function deleteUser($userId)
+    {
         if (!$userId) {
             return "ID utilisateur non valide.";
         }
 
         // Appelez la méthode du modèle User pour supprimer
-        $result = $user->deleteUser($userId);
+        $result = $this->userModel->deleteUser($userId);
 
         // Gérer le retour et les messages
         if ($result) {
@@ -89,12 +90,13 @@ class UserController
         }
     }
 
-public function displayAllUsers($page, $searchUsername)
-{
-    $userModel = new User();
-    return $userModel->displayAllUsers($page, $searchUsername);
-}
 
-// ----------------------------------------------------------------
+ // Fonction pour afficher les utilisateurs
+
+    public function displayAllUsers($page, $searchUsername)
+    {
+        return $this->userModel->displayAllUsers($page, $searchUsername);
+    }
+
 
 }

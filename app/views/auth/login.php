@@ -8,15 +8,15 @@ require_once '../../controllers/UserController.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userController = new UserController();
     $loginResult = $userController->login($_POST['username'], $_POST['password']);
-if($loginResult){
-    if ($_SESSION['role'] === 'admin') {
-        header("Location: ../admin/admin.php");
-    } else {
-        header("Location: ../../index.php");
-    }
-    exit();
+    if ($loginResult) {
+        if ($_SESSION['role'] === 'admin') {
+            header("Location: ../admin/admin.php");
+        } else {
+            header("Location: ../../index.php");
+        }
+        exit();
 
-}
+    }
 }
 
 if (isset($_SESSION['success'])) {
@@ -37,12 +37,14 @@ if (isset($_SESSION['warning'])) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../public/css/auth.css">
     <title>Connexion</title>
 </head>
+
 <body>
 
     <header>
@@ -67,4 +69,5 @@ if (isset($_SESSION['warning'])) {
     </section>
 
 </body>
+
 </html>

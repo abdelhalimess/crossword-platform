@@ -33,6 +33,11 @@ class SavedCellsController
         return $this->cellModel->getCellsByGridId($userid,$gridId);
     }
 
+    public function getNotRegisteredUserCells($gridId)
+    {
+        return $this->cellModel->getCellsClearContent($gridId);
+    }
+
 
     // Récupérer les cellules d'une grille
         public function getUserGrids($userid)

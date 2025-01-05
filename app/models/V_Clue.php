@@ -19,9 +19,9 @@ class V_Clue
           VALUES (:id, :grid_id, :content)";
 
         $stmt = $this->db->prepare($query);
-        
-        
-        $stmt->bindParam(':id', $id); 
+
+
+        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':grid_id', $gridId);
         $stmt->bindParam(':content', $content);
 
@@ -42,20 +42,6 @@ class V_Clue
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

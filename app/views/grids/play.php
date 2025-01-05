@@ -17,24 +17,32 @@ require_once '../../controllers/UserController.php';
 if (isset($_GET['id'])) {
     // Récupérer la valeur de 'id'
     $id = $_GET['id'];
+} else {
+    // Gérer le cas où l'utilisateur n'est pas connecté
+    // header('Location: ../auth/login.php');
+
 }
 
 $gridController = new GridController();
 $registrationResult = $gridController->playGrid($id);
 
 $savedCellController = new SavedCellsController();
+$cellController = new CellController();
+
 
 
 if (isset($_SESSION['user_id'])) {
     $userId = $_SESSION['user_id']; // ID de l'utilisateur connecté
+    $registrationResult5 = $savedCellController->getUserCells($userId, $id);
 } else {
     // Gérer le cas où l'utilisateur n'est pas connecté
-    echo "Utilisateur non connecté.";
+    $userId = '';
+    $registrationResult5 = $savedCellController->getNotRegisteredUserCells($id);
+
 }
 
 
 // if 
-$registrationResult5=$savedCellController->getUserCells($userId,$id);
 
 
 
@@ -104,6 +112,7 @@ $data = json_decode(file_get_contents('php://input'), true); // Lire les donnée
 </head>
 <body>
     <section>
+    <div id="userInfo" data-user-id="<?php echo htmlspecialchars($userId); ?>"></div>
 
     <a href="../../index.php">
         
@@ -120,7 +129,12 @@ $data = json_decode(file_get_contents('php://input'), true); // Lire les donnée
     <div id="registration-data5" data-registration5="<?php echo htmlspecialchars($registrationResultJson5); ?>"></div>
     
 
-    <div id="buttons"> </div>
+    <div id="buttons"> 
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'registered'): ?>
+    <button type="button" id="SauvegarderButton">Sauvegarder</button>
+    <?php endif; ?>
+
+    </div>
 
 
     </section>

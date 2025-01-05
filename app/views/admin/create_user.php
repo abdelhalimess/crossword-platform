@@ -54,14 +54,15 @@ if (isset($_SESSION['warning'])) {
             <h2>Panneau Admin</h2>
         </div>
         <nav class="sidebar-menu">
-        <ul>
-            <li><a href="create_user.php">Créer des utilisateurs</a></li>
-            <li><a href="users_list.php">Gérer les utilisateurs</a></li>
-            <li><a href="grids_list.php">Gérer les grilles</a></li>
-        </ul>
-        <ul class="logout-section">
-            <li class="logout"><a href="views/auth/logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
-        </ul>
+            <ul>
+                <li><a href="create_user.php">Créer des utilisateurs</a></li>
+                <li><a href="users_list.php">Gérer les utilisateurs</a></li>
+                <li><a href="grids_list.php">Gérer les grilles</a></li>
+            </ul>
+            <ul class="logout-section">
+                <li class="logout"><a href="../auth/logout.php"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+
+            </ul>
         </nav>
     </aside>
 
@@ -85,7 +86,7 @@ if (isset($_SESSION['warning'])) {
             </form>
         </section>
 
-        </main>
+    </main>
 </body>
 
 </html>

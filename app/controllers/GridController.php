@@ -3,16 +3,18 @@ require_once __DIR__ . '/../models/Grid.php';
 class GridController
 {
 
+    private $gridModel;
 
+    public function __construct()
+    {
+        $this->gridModel = new Grid();
+    }
 
-
-
-
+    // Fonction pour créer une grille
     public function createGrid($name, $user_id, $num_rows, $num_columns, $difficulty)
     {
 
-        $grid = new Grid();
-        if ($grid->createGrid($name, $user_id, $num_rows, $num_columns, $difficulty)) {
+        if ($this->gridModel->createGrid($name, $user_id, $num_rows, $num_columns, $difficulty)) {
             return true;
 
         } else {
@@ -23,90 +25,75 @@ class GridController
 
 
 
+    // Fonction pour récupérer une grille par son ID
 
     public function getById($id)
     {
 
-        $grid = new Grid();
-        return $grid->getById($id);
+        return $this->gridModel->getById($id);
 
 
     }
 
 
-    // ----------------------------------------------------------------------
-
+    // Fonction pour afficher les grilles pour un utilisateur
 
     public function displayAllGridUser()
     {
 
-        $grid = new Grid();
-
-
-        return $grid->displayAllGridUser(); // Appel de la méthode pour récupérer les grilles
+        return $this->gridModel->displayAllGridUser(); // Appel de la méthode pour récupérer les grilles
 
     }
+
+
+    // Fonction pour afficher les grilles pour un admin
 
     public function displayAllGridAdmin($page, $search)
     {
 
-        $grid = new Grid();
-
-
-        return $grid->displayAllGridAdmin($page, $search); // Appel de la méthode pour récupérer les grilles
+        return $this->gridModel->displayAllGridAdmin($page, $search); // Appel de la méthode pour récupérer les grilles
 
     }
 
-    public function sortGrids($page, $sortBy, $order)
-    {
-        $gridModel = new Grid();
-        return $gridModel->sortGrids($page, $sortBy, $order);
-    }
 
     public function getTotalGridsCount()
     {
-        $gridModel = new Grid();
-        return $gridModel->getTotalGridsCount();
+        return $this->gridModel->getTotalGridsCount();
     }
 
     public function countTotalGrids()
     {
-        $gridModel = new Grid();
-        return $gridModel->countTotalGrids();
+
+        return $this->gridModel->countTotalGrids();
     }
 
 
-
+    // Fonction pour supprimer une grille
     public function deleteGrid($grid_id)
     {
-        $gridModel = new Grid();
-        return $gridModel->deleteGrid($grid_id);
+        return $this->gridModel->deleteGrid($grid_id);
     }
 
 
 
 
-    // ----------------------------------------------------------------------
-
+    // Fonction pour jouer une grille
 
     public function playGrid($id)
     {
 
-        $grid = new Grid();
 
-
-        return $grid->playGrid($id); // Appel de la méthode pour récupérer les grilles
+        return $this->gridModel->playGrid($id);
 
     }
 
+    // Fonction pour récuperer le ID d'une grille
 
     public function getMaxGrid()
     {
 
-        $grid = new Grid();
 
-
-        return $grid->getMaxGrid(); // Appel de la méthode pour récupérer les grilles
+        return $this->gridModel->getMaxGrid();
 
     }
 

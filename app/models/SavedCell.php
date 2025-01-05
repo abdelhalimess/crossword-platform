@@ -13,7 +13,7 @@ class UserCell
     }
 
     // Ajouter une cellule
-    public function createCell($userid,$gridId, $row, $col, $content)
+    public function createCell($userid, $gridId, $row, $col, $content)
     {
         $query = "INSERT INTO saved_cells (user_id,grid_id, rowa, col, content) 
                   VALUES (:user_id, :grid_id, :rowa, :col, :content)";
@@ -29,7 +29,7 @@ class UserCell
     }
 
     // Récupérer les cellules d'une grille
-    public function getCellsByGridId($userid,$gridId)
+    public function getCellsByGridId($userid, $gridId)
     {
         $query = "SELECT * FROM saved_cells WHERE grid_id = :grid_id AND user_id=:user_id";
         $stmt = $this->db->prepare($query);
@@ -40,23 +40,43 @@ class UserCell
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
-    public function getCellByPosition($userid, $gridId, $row, $col)
+    public function getCellsClearContent($gridId)
 {
-    $query = "SELECT * FROM saved_cells WHERE user_id = :user_id AND grid_id = :grid_id AND rowa = :rowa AND col = :col";
+    $query = "SELECT * FROM saved_cells WHERE grid_id = :grid_id";
     $stmt = $this->db->prepare($query);
-    $stmt->bindParam(':user_id', $userid);
-    $stmt->bindParam(':grid_id', $gridId);
-    $stmt->bindParam(':rowa', $row);
-    $stmt->bindParam(':col', $col);
+    $stmt->bindParam(':grid_id', $gridId, PDO::PARAM_INT);
     $stmt->execute();
 
-    return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne une seule cellule ou false
+    $cells = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Parcourir les cellules pour modifier le contenu si nécessaire
+    foreach ($cells as &$cell) {
+        if ($cell['content'] !== 'black') {
+            $cell['content'] = ""; // Écraser le contenu avec une chaîne vide
+        }
+    }
+
+    return $cells;
 }
 
 
 
-    
+    public function getCellByPosition($userid, $gridId, $row, $col)
+    {
+        $query = "SELECT * FROM saved_cells WHERE user_id = :user_id AND grid_id = :grid_id AND rowa = :rowa AND col = :col";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $userid);
+        $stmt->bindParam(':grid_id', $gridId);
+        $stmt->bindParam(':rowa', $row);
+        $stmt->bindParam(':col', $col);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne une seule cellule ou false
+    }
+
+
+
+
 
 
     public function getGridsUser($userid)
@@ -70,22 +90,22 @@ class UserCell
     }
 
 
-        // Mettre à jour une cellule
-        public function updateCell($user_id,$gridId, $row, $col, $content)
-        {
-            $query = "UPDATE saved_cells SET content = :content WHERE user_id=:user_id AND grid_id = :grid_id AND rowa = :rowa AND col = :col";
-            $stmt = $this->db->prepare($query);
-            $stmt->bindParam(':user_id', $user_id);
-            $stmt->bindParam(':content', $content);
-            $stmt->bindParam(':grid_id', $gridId);
-            $stmt->bindParam(':rowa', $row); // Correction du nom de la colonne en `rowa`
-            $stmt->bindParam(':col', $col);
-    
-            return $stmt->execute();
-            
-        }
+    // Mettre à jour une cellule
+    public function updateCell($user_id, $gridId, $row, $col, $content)
+    {
+        $query = "UPDATE saved_cells SET content = :content WHERE user_id=:user_id AND grid_id = :grid_id AND rowa = :rowa AND col = :col";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':user_id', $user_id);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':grid_id', $gridId);
+        $stmt->bindParam(':rowa', $row); // Correction du nom de la colonne en `rowa`
+        $stmt->bindParam(':col', $col);
+
+        return $stmt->execute();
+
+    }
 
 
-    
+
 }
 ?>

@@ -22,7 +22,6 @@ class CellController
         return $this->cellModel->getCellsByGridId($gridId);
     }
 
-
     
 
     // Récupérer les cellules noires
@@ -31,15 +30,6 @@ class CellController
         return $this->cellModel->getBlackCells($gridId);
     }
     
-
-
-
-
-    // Mettre à jour une cellule
-    public function updateCell($gridId, $row, $col, $content)
-    {
-        return $this->cellModel->updateCell($gridId, $row, $col, $content);
-    }
 
     // Supprimer une cellule
     public function deleteCell($gridId, $row, $col)

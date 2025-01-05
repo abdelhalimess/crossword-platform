@@ -17,12 +17,11 @@ class V_ClueController
     }
 
 
-        // Récupérer les cellules d'une grille
-        public function getV_Clues($gridId)
-        {
-            return $this->V_ClueModel->getV_CluesByGridId($gridId);
-        }
-    
+    // Récupérer les cellules d'une grille
+    public function getV_Clues($gridId)
+    {
+        return $this->V_ClueModel->getV_CluesByGridId($gridId);
+    }
 
 
 
@@ -30,7 +29,8 @@ class V_ClueController
 
 
 
-// à modifier 
+
+    // à modifier 
 
 }
 ?>
