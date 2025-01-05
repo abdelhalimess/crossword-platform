@@ -65,7 +65,9 @@ $totalPages = ceil($totalGrids / $itemsPerPage);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../public/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Grilles de Mots Croisés</title>
+    <title>Mes grilles de Mots Croisés en cours</title>
+    <link rel="icon" type="image/png" href="../../public/img/crossword-placeholder3.png">
+
 </head>
 
 <body>

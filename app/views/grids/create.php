@@ -116,6 +116,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../../public/css/grids.css">
 
     <title>Création de grille </title>
+    <link rel="icon" type="image/png" href="../../public/img/crossword-placeholder3.png">
+
 </head>
 <body>
 <section>

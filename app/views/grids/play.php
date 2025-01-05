@@ -105,7 +105,9 @@ $data = json_decode(file_get_contents('php://input'), true); // Lire les donnée
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../../public/css/style.css"> -->
-    <title>Document</title>
+    <title>Jouer</title>
+    <link rel="icon" type="image/png" href="../../public/img/crossword-placeholder3.png">
+
     <link rel="stylesheet" href="../../public/css/play.css">
 
     <script src="../../public/js/play.js"></script> 
