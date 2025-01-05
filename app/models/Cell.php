@@ -1,0 +1,85 @@
+<?php
+
+require_once __DIR__ . '/../core/Database.php';
+
+class Cell
+{
+    private $db;
+
+    public function __construct()
+    {
+        // Connexion à la base de données via la classe Database
+        $this->db = Database::connect();
+    }
+
+    // Ajouter une cellule
+    public function createCell($gridId, $row, $col, $content)
+    {
+        $query = "INSERT INTO cells (grid_id, rowa, col, content) 
+                  VALUES (:grid_id, :rowa, :col, :content)";
+        $stmt = $this->db->prepare($query);
+
+        $stmt->bindParam(':grid_id', $gridId);
+        $stmt->bindParam(':rowa', $row); // Changement : $row au lieu de $rowa
+        $stmt->bindParam(':col', $col);
+        $stmt->bindParam(':content', $content);
+
+        // Exécution de la requête
+        return $stmt->execute();
+    }
+
+    // Récupérer les cellules d'une grille
+    public function getCellsByGridId($gridId)
+    {
+        $query = "SELECT * FROM cells WHERE grid_id = :grid_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':grid_id', $gridId);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+    // Récupérer les cellules noires d'une grille
+    public function getBlackCells($gridId)
+    {
+        $query = "SELECT * FROM cells WHERE grid_id = :grid_id AND content = 'black'";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':grid_id', $gridId);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+
+
+
+    
+    // Mettre à jour une cellule
+    public function updateCell($gridId, $row, $col, $content)
+    {
+        $query = "UPDATE cells SET content = :content WHERE grid_id = :grid_id AND rowa = :rowa AND col = :col";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':content', $content);
+        $stmt->bindParam(':grid_id', $gridId);
+        $stmt->bindParam(':rowa', $row); // Correction du nom de la colonne en `rowa`
+        $stmt->bindParam(':col', $col);
+
+        return $stmt->execute();
+    }
+
+    // Supprimer une cellule
+    public function deleteCell($gridId, $row, $col)
+    {
+        $query = "DELETE FROM cells WHERE grid_id = :grid_id AND rowa = :rowa AND col = :col";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':grid_id', $gridId);
+        $stmt->bindParam(':rowa', $row); // Correction du nom de la colonne en `rowa`
+        $stmt->bindParam(':col', $col);
+
+        return $stmt->execute();
+    }
+}
+?>

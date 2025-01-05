@@ -1,0 +1,131 @@
+/* Reset des styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style du corps de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* Section principale */
+section {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* Titre de la page */
+h1 {
+    font-size: 28px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Style du formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Style des champs de saisie */
+input[type="text"],
+input[type="number"],
+select {
+    padding: 15px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 5px;
+    box-sizing: border-box;  /* Assure que le padding n'affecte pas la largeur totale */
+}
+
+/* Étiquettes des champs */
+label {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+/* Bouton Suivant */
+button {
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    align-self: flex-start;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #d35400;
+}
+
+/* Bouton Disabled (si nécessaire) */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Affichage des erreurs */
+.error-message {
+    color: red;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Mise en forme des éléments du formulaire */
+/* #formContent {
+    margin-bottom: 20px;
+} */
+
+/* Bouton retour à l'accueil */
+#homeButton {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+    text-align: center;
+    margin-top: 20px;
+    align-self: center;
+    transition: background-color 0.3s ease;
+}
+
+#homeButton:hover {
+    background-color: #1e88e5;
+}
+
+#homeButton:focus {
+    outline: none;
+}
+
+/* Largeur et padding accrus pour les indices et autres champs */
+#difficulty,
+#name,
+#rows,
+#columns {
+    padding: 18px;
+    font-size: 16px;
+}
+
+
+
+#buttons #homeButton {
+    margin-left: 40px;
+}

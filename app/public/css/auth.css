@@ -1,0 +1,129 @@
+/* Général */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background-color: #2980b9;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+/* Section principale */
+section {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Message d'erreur */
+section p {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+section p a {
+    color: #d35400;
+    text-decoration: none;
+}
+
+section p a:hover {
+    text-decoration: underline;
+}
+
+/* Formulaire */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 10px 0 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input:focus {
+    border-color: #e67e22;
+    outline: none;
+}
+
+button {
+    padding: 10px;
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d35400;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    section {
+        padding: 15px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+}
+
+
+.alert {
+    position: fixed;
+    top: 20px;
+    left: 80%;
+    transform: translateX(-50%); /* Centrer horizontalement */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    z-index: 1000;
+    width: auto;
+    max-width: 90%; /* Pour limiter la largeur sur des écrans plus petits */
+    text-align: center;
+}
+
+.alert-success {
+    background-color: #27ae60;
+    color: white;
+}
+
+.alert-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.alert-warning {
+    background-color: #f39c12;
+    color: white;
+}
+
