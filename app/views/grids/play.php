@@ -37,7 +37,7 @@ if (isset($_SESSION['user_id'])) {
 } else {
     // Gérer le cas où l'utilisateur n'est pas connecté
     $userId = '';
-    $cells = $savedCellController->getNotRegisteredUserCells($id);
+    $cells = $cellController->getBlackCells($id);
 
 }
 

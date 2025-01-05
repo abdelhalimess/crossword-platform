@@ -38,17 +38,24 @@ class Cell
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    // Récupérer les cellules noires d'une grille
     public function getBlackCells($gridId)
-    {
-        $query = "SELECT * FROM cells WHERE grid_id = :grid_id AND content = 'black'";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindParam(':grid_id', $gridId);
-        $stmt->execute();
+{
+    $query = "SELECT * FROM cells WHERE grid_id = :grid_id";
+    $stmt = $this->db->prepare($query);
+    $stmt->bindParam(':grid_id', $gridId, PDO::PARAM_INT);
+    $stmt->execute();
 
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $cells = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Parcourir les cellules pour modifier le contenu si nécessaire
+    foreach ($cells as &$cell) {
+        if ($cell['content'] !== 'black') {
+            $cell['content'] = ""; // Écraser le contenu avec une chaîne vide
+        }
     }
+
+    return $cells;
+}
 
 
     // Supprimer une cellule

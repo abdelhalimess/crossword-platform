@@ -40,25 +40,6 @@ class UserCell
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getBlackCells($gridId)
-{
-    $query = "SELECT * FROM saved_cells WHERE grid_id = :grid_id";
-    $stmt = $this->db->prepare($query);
-    $stmt->bindParam(':grid_id', $gridId, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $cells = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    // Parcourir les cellules pour modifier le contenu si nécessaire
-    foreach ($cells as &$cell) {
-        if ($cell['content'] !== 'black') {
-            $cell['content'] = ""; // Écraser le contenu avec une chaîne vide
-        }
-    }
-
-    return $cells;
-}
-
 
 
     public function getCellByPosition($userid, $gridId, $row, $col)

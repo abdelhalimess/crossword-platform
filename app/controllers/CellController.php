@@ -25,11 +25,11 @@ class CellController
     
 
     // Récupérer les cellules noires
+
     public function getBlackCells($gridId)
     {
         return $this->cellModel->getBlackCells($gridId);
     }
-    
 
     // Supprimer une cellule
     public function deleteCell($gridId, $row, $col)
